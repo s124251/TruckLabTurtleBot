@@ -1,0 +1,68 @@
+{
+  "files" : [ {
+    "remoteURL" : "https://raw.githubusercontent.com/ROBOTIS-GIT/OpenCR/master/arduino/opencr_release/package_opencr_index.json",
+    "localPath" : "/home/gdubbelman/.arduino15/cache/raw.githubusercontent.com/ROBOTIS-GIT/OpenCR/master/arduino/opencr_release/package_opencr_index.json",
+    "eTag" : "43139890dd5a871a13816da4ea0f33c42fa260b92d197ebff760b5180b422faf",
+    "md5" : "MD5:4279cb61713af7000c73a56457252cb8",
+    "createdAt" : "2019-11-06T15:58:25.051",
+    "cacheControl" : {
+      "maxAge" : 300,
+      "mustRevalidate" : false,
+      "noCache" : false,
+      "noStore" : false
+    },
+    "expires" : "2019-11-06T16:03:25.051"
+  }, {
+    "remoteURL" : "https://downloads.arduino.cc/libraries/library_index.json.gz",
+    "localPath" : "/home/gdubbelman/.arduino15/cache/downloads.arduino.cc/libraries/library_index.json.gz",
+    "eTag" : "cce10f7fc74340978795e5088c1e7b58",
+    "md5" : "MD5:cce10f7fc74340978795e5088c1e7b58",
+    "createdAt" : "2019-11-06T13:13:40.171",
+    "cacheControl" : {
+      "maxAge" : 14400,
+      "mustRevalidate" : false,
+      "noCache" : false,
+      "noStore" : false
+    },
+    "expires" : "2019-11-06T17:13:40.171"
+  }, {
+    "remoteURL" : "https://downloads.arduino.cc/packages/package_index.json.sig",
+    "localPath" : "/home/gdubbelman/.arduino15/cache/downloads.arduino.cc/packages/package_index.json.sig",
+    "eTag" : "1c9d2516d2205eb4ce157521f0e5f8ae",
+    "md5" : "MD5:1c9d2516d2205eb4ce157521f0e5f8ae",
+    "createdAt" : "2019-11-06T15:21:49.862",
+    "cacheControl" : {
+      "maxAge" : 3600,
+      "mustRevalidate" : false,
+      "noCache" : false,
+      "noStore" : false
+    },
+    "expires" : "2019-11-06T16:21:49.862"
+  }, {
+    "remoteURL" : "https://downloads.arduino.cc/libraries/library_index.json.sig",
+    "localPath" : "/home/gdubbelman/.arduino15/cache/downloads.arduino.cc/libraries/library_index.json.sig",
+    "eTag" : "74e66437ee374286629c6cabbbc510e3",
+    "md5" : "MD5:74e66437ee374286629c6cabbbc510e3",
+    "createdAt" : "2019-11-06T13:13:40.434",
+    "cacheControl" : {
+      "maxAge" : 14400,
+      "mustRevalidate" : false,
+      "noCache" : false,
+      "noStore" : false
+    },
+    "expires" : "2019-11-06T17:13:40.434"
+  }, {
+    "remoteURL" : "https://downloads.arduino.cc/packages/package_index.json",
+    "localPath" : "/home/gdubbelman/.arduino15/cache/downloads.arduino.cc/packages/package_index.json",
+    "eTag" : "669db8ca08188a51f9b7d2fe0b74c3d0",
+    "md5" : "MD5:669db8ca08188a51f9b7d2fe0b74c3d0",
+    "createdAt" : "2019-11-06T15:21:49.812",
+    "cacheControl" : {
+      "maxAge" : 3600,
+      "mustRevalidate" : false,
+      "noCache" : false,
+      "noStore" : false
+    },
+    "expires" : "2019-11-06T16:21:49.812"
+  } ]
+}
