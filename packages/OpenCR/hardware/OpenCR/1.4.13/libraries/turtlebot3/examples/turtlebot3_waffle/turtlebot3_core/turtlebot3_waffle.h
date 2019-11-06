@@ -21,9 +21,9 @@
 
 #define NAME                             "Waffle or Waffle Pi"
 
-#define WHEEL_RADIUS                     0.033           // meter
-#define WHEEL_SEPARATION                 0.287           // meter (BURGER : 0.160, WAFFLE : 0.287)
-#define TURNING_RADIUS                   0.1435          // meter (BURGER : 0.080, WAFFLE : 0.1435)
+#define WHEEL_RADIUS                     0.042           // meter
+#define WHEEL_SEPARATION                 0.144           // meter (BURGER : 0.160, WAFFLE : 0.287)
+#define TURNING_RADIUS                   0.47          // meter (BURGER : 0.080, WAFFLE : 0.1435)
 #define ROBOT_RADIUS                     0.220           // meter (BURGER : 0.105, WAFFLE : 0.220)
 #define ENCODER_MIN                      -2147483648     // raw
 #define ENCODER_MAX                      2147483648      // raw

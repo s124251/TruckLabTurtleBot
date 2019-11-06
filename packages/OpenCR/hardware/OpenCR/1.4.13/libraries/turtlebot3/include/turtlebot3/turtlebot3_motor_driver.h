@@ -46,12 +46,16 @@
 
 #define DXL_LEFT_ID                     1       // ID of left motor
 #define DXL_RIGHT_ID                    2       // ID of right motor
+#define DXL_FRONT_ID                    3       // ID of front motor
 
 #define BAUDRATE                        1000000 // baurd rate of Dynamixel
 #define DEVICENAME                      ""      // no need setting on OpenCR
 
 #define TORQUE_ENABLE                   1       // Value for enabling the torque
 #define TORQUE_DISABLE                  0       // Value for disabling the torque
+
+#define X_POS_CENTER                    2048
+#define K                               -731
 
 #define LEFT                            0
 #define RIGHT                           1
@@ -81,6 +85,7 @@ class Turtlebot3MotorDriver
   float  protocol_version_;
   uint8_t left_wheel_id_;
   uint8_t right_wheel_id_;
+  uint8_t front_joint_id_;
   bool torque_;
 
   uint16_t dynamixel_limit_max_velocity_;

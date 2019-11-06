@@ -22,7 +22,8 @@ Turtlebot3MotorDriver::Turtlebot3MotorDriver()
 : baudrate_(BAUDRATE),
   protocol_version_(PROTOCOL_VERSION),
   left_wheel_id_(DXL_LEFT_ID),
-  right_wheel_id_(DXL_RIGHT_ID)
+  right_wheel_id_(DXL_RIGHT_ID),
+  front_joint_id_(DXL_FRONT_ID)
 {
   torque_ = false;
   dynamixel_limit_max_velocity_ = BURGER_DXL_LIMIT_MAX_VELOCITY;
@@ -58,6 +59,7 @@ bool Turtlebot3MotorDriver::init(String turtlebot3)
 
   groupSyncWriteVelocity_ = new dynamixel::GroupSyncWrite(portHandler_, packetHandler_, ADDR_X_GOAL_VELOCITY, LEN_X_GOAL_VELOCITY);
   groupSyncReadEncoder_   = new dynamixel::GroupSyncRead(portHandler_, packetHandler_, ADDR_X_PRESENT_POSITION, LEN_X_PRESENT_POSITION);
+  groupBulkWrite_ = new dynamixel::GroupBulkWrite(portHandler_, packetHandler_);
   
   if (turtlebot3 == "Burger")
     dynamixel_limit_max_velocity_ = BURGER_DXL_LIMIT_MAX_VELOCITY;
@@ -90,6 +92,18 @@ bool Turtlebot3MotorDriver::setTorque(bool onoff)
   }
 
   dxl_comm_result = packetHandler_->write1ByteTxRx(portHandler_, DXL_RIGHT_ID, ADDR_X_TORQUE_ENABLE, onoff, &dxl_error);
+  if(dxl_comm_result != COMM_SUCCESS)
+  {
+    Serial.println(packetHandler_->getTxRxResult(dxl_comm_result));
+    return false;
+  }
+  else if(dxl_error != 0)
+  {
+    Serial.println(packetHandler_->getRxPacketError(dxl_error));
+    return false;
+  }
+  
+  dxl_comm_result = packetHandler_->write1ByteTxRx(portHandler_, DXL_FRONT_ID, ADDR_X_TORQUE_ENABLE, onoff, &dxl_error);
   if(dxl_comm_result != COMM_SUCCESS)
   {
     Serial.println(packetHandler_->getTxRxResult(dxl_comm_result));
@@ -197,11 +211,14 @@ bool Turtlebot3MotorDriver::writeVelocity(int64_t left_value, int64_t right_valu
 bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float wheel_separation, float* value)
 {
   bool dxl_comm_result = false;
+  bool dxl_addparam_result_;
+  int8_t dxl_comm_result_;
   
   float wheel_velocity_cmd[2];
 
   float lin_vel = value[LEFT];
   float ang_vel = value[RIGHT];
+  float front_joint_value;
 
   wheel_velocity_cmd[LEFT]   = lin_vel - (ang_vel * wheel_separation / 2);
   wheel_velocity_cmd[RIGHT]  = lin_vel + (ang_vel * wheel_separation / 2);
@@ -213,5 +230,21 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
   if (dxl_comm_result == false)
     return false;
 
+  return true;
+  
+  front_joint_value   = X_POS_CENTER + ang_vel * K; 
+  
+  dxl_addparam_result_ = groupBulkWrite_->addParam(front_joint_id_, ADDR_X_GOAL_POSITION, LEN_X_GOAL_POSITION, (uint8_t*)&front_joint_value);
+  if (dxl_addparam_result_ != true)
+    return false;
+
+  dxl_comm_result_ = groupBulkWrite_->txPacket();
+  if (dxl_comm_result_ != COMM_SUCCESS)
+  {
+    packetHandler_->getTxRxResult(dxl_comm_result_);
+    return false;
+  }
+
+  groupBulkWrite_->clearParam();
   return true;
 }
