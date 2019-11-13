@@ -95,6 +95,7 @@ class Turtlebot3MotorDriver
 
   dynamixel::GroupSyncWrite *groupSyncWriteVelocity_;
   dynamixel::GroupSyncRead *groupSyncReadEncoder_;
+  dynamixel::GroupBulkWrite *groupBulkWrite_;
 };
 
 #endif // TURTLEBOT3_MOTOR_DRIVER_H_

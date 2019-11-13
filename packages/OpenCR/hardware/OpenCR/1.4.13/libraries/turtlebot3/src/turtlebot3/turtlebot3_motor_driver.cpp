@@ -17,6 +17,7 @@
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho */
 
 #include "../../include/turtlebot3/turtlebot3_motor_driver.h"
+#include <iostream>
 
 Turtlebot3MotorDriver::Turtlebot3MotorDriver()
 : baudrate_(BAUDRATE),
@@ -218,7 +219,8 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
 
   float lin_vel = value[LEFT];
   float ang_vel = value[RIGHT];
-  float front_joint_value;
+  int front_joint_value;
+  uint8_t dxl_error = 0;
 
   wheel_velocity_cmd[LEFT]   = lin_vel - (ang_vel * wheel_separation / 2);
   wheel_velocity_cmd[RIGHT]  = lin_vel + (ang_vel * wheel_separation / 2);
@@ -230,21 +232,12 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
   if (dxl_comm_result == false)
     return false;
 
-  return true;
-  
   front_joint_value   = X_POS_CENTER + ang_vel * K; 
   
-  dxl_addparam_result_ = groupBulkWrite_->addParam(front_joint_id_, ADDR_X_GOAL_POSITION, LEN_X_GOAL_POSITION, (uint8_t*)&front_joint_value);
-  if (dxl_addparam_result_ != true)
-    return false;
+      // Write goal position
+  dxl_comm_result = packetHandler_->write4ByteTxRx(portHandler_, front_joint_id_, ADDR_X_GOAL_POSITION, front_joint_value, &dxl_error);
 
-  dxl_comm_result_ = groupBulkWrite_->txPacket();
-  if (dxl_comm_result_ != COMM_SUCCESS)
-  {
-    packetHandler_->getTxRxResult(dxl_comm_result_);
-    return false;
-  }
 
-  groupBulkWrite_->clearParam();
   return true;
+  
 }
