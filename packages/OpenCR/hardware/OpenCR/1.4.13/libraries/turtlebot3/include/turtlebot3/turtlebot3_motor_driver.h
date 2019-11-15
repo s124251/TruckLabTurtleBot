@@ -55,7 +55,7 @@
 #define TORQUE_DISABLE                  0       // Value for disabling the torque
 
 #define X_POS_CENTER                    2048
-#define K                               -731
+#define K                               -182
 
 #define LEFT                            0
 #define RIGHT                           1

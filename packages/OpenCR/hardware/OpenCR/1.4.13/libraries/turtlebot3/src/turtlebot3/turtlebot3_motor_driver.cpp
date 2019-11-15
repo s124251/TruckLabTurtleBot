@@ -232,7 +232,15 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
   if (dxl_comm_result == false)
     return false;
 
-  front_joint_value   = X_POS_CENTER + ang_vel * K; 
+
+  if (lin_vel == 0)
+  {
+  front_joint_value   = X_POS_CENTER;
+  }
+  else
+  {
+  front_joint_value   = X_POS_CENTER + ang_vel/lin_vel * K;
+  }
   
       // Write goal position
   dxl_comm_result = packetHandler_->write4ByteTxRx(portHandler_, front_joint_id_, ADDR_X_GOAL_POSITION, front_joint_value, &dxl_error);
