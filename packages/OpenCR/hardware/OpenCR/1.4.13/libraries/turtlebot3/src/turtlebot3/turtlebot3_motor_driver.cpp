@@ -220,7 +220,10 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
   float lin_vel = value[LEFT];
   float ang_vel = value[RIGHT];
   int front_joint_value;
+  float delta;
   uint8_t dxl_error = 0;
+
+  
 
   wheel_velocity_cmd[LEFT]   = lin_vel - (ang_vel * wheel_separation / 2);
   wheel_velocity_cmd[RIGHT]  = lin_vel + (ang_vel * wheel_separation / 2);
@@ -232,14 +235,16 @@ bool Turtlebot3MotorDriver::controlMotor(const float wheel_radius, const float w
   if (dxl_comm_result == false)
     return false;
 
-
   if (lin_vel == 0)
   {
   front_joint_value   = X_POS_CENTER;
   }
   else
   {
-  front_joint_value   = X_POS_CENTER + ang_vel/lin_vel * K;
+  //front_joint_value   = X_POS_CENTER + ang_vel/lin_vel * K;
+  delta = - atan (WHEELBASE * ang_vel / lin_vel) * 180 / 3.14;
+  front_joint_value   = - 3.4880*pow(10,-8)*pow(delta,6) + 1.3273*pow(10,-6)*pow(delta,5) + 4.5911
+  *pow(10,-5)*pow(delta,4) - 7.6459*pow(10,-4)*pow(delta,3) - 0.0620*pow(delta,2) + 14.2775*delta + 2096.5; 
   }
   
       // Write goal position

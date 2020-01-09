@@ -54,8 +54,9 @@
 #define TORQUE_ENABLE                   1       // Value for enabling the torque
 #define TORQUE_DISABLE                  0       // Value for disabling the torque
 
-#define X_POS_CENTER                    2048
+#define X_POS_CENTER                    2096.5
 #define K                               -182
+#define WHEELBASE                       0.28
 
 #define LEFT                            0
 #define RIGHT                           1
